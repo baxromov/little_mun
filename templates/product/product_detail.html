@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 px-10">
+            <div class="card mb-3 mx-10">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %} {% endif %}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <small>{{ product.category.title }}</small>
+                            <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text"><small class="text-muted">{{ product.created_at }}</small></p>
+                            <a href="{% url 'product_update' product.id %}" class="btn btn-warning">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

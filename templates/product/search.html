@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="section mt-5">
+        <div class="container">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{% if product.image %}{{ product.image.url }}{% else %} {% endif %}" class="card-img-top" alt="{{ product.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.title|truncatewords:15 }}</h5>
+                                <p class="card-text">
+                                    {% if product.description %}
+                                        {{ product.description|truncatewords:15 }}
+                                    {% else %}
+                                        The description is empty!
+                                    {% endif %}
+                                </p>
+                                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">Detail</a>
+                                <a href="{% url 'delete_product' product.id %}" class="btn btn-danger">Delete</a>
+
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

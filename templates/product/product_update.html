@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Title</label>
+            <input type="text" name="title" value="{{ product.title }}" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <label for="inputEmail4" class="form-label">Quantity</label>
+            <input type="number" name="quantity" value="{{ product.quantity }}" class="form-control">
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputCity" class="form-label">Description</label>
+            <input type="text" name="description" value="{{ product.description }}" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <label for="inputState" class="form-label">Category</label>
+            <select id="inputState" class="form-select" name="category">
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.title }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <div class="col-12">
+            <div>
+                <img src="{% if product.image %}{{ product.image.url }}{% else %} {% endif %}" alt="{{ product.title }}" style="width: 200px; height: 200px">
+                <label for="formFileLg" class="form-label">Image</label>
+                <input class="form-control form-control-lg" name="image" id="formFileLg" type="file">
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="inputEmail4" class="form-label">Quantity</label>
+            <input type="datetime-local" name="manufacturing_date" value="{{ product.manufacturing_date }}" class="form-control">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+{% endblock %}
