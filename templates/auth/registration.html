@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h1 class="mb-5">Registration</h1>
+    <form class="row g-3" action="" method="POST">
+        {% csrf_token %}
+        <div class="col-md-12">
+            <label for="inputusername" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="inputusername">
+        </div>
+        <div class="col-md-12">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" name="first_name" class="form-control" id="first_name">
+        </div>
+        <div class="col-md-6">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" name="last_name" class="form-control" id="last_name">
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword1" class="form-label">Password</label>
+            <input type="password" name="password1" class="form-control" id="inputPassword1">
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Retry Password</label>
+            <input type="password" name="password2" class="form-control" id="inputPassword4">
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+{% endblock %}
