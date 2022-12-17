@@ -14,6 +14,10 @@ from manufacturing.models import Product, Category
 
 
 class ProductForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('author', None)
+        super(ProductForm, self).__init__(*args, **kwargs)
+
     image = forms.FileField(required=False)
 
     class Meta:
@@ -24,7 +28,7 @@ class ProductForm(ModelForm):
             'description',
             'quantity',
             'manufacturing_date',
-            'image',
+            'image'
         ]
         labels = {
             'manufacturing_date': 'Дата изготовления:',

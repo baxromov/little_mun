@@ -18,7 +18,7 @@ class HomePageView(ListView):
     template_name = 'product/product_list.html'
     context_object_name = 'products'
 
-#
+
 # def product_detail(request, pk):
 #     product = Product.objects.get(id=pk)
 #     data = {
@@ -30,22 +30,19 @@ class HomePageView(ListView):
 class ProductCreateView(CreateView):
     model = Product
     template_name = 'product/product_create.html'
-    # fields = [
-    #     'title',
-    #     'category',
-    #     'description',
-    #     'quantity',
-    #     'manufacturing_date',
-    #     'image',
-    # ]
     form_class = ProductForm
     success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.author_id = self.request.user.pk
+        return super().form_valid(form)
 
 
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'product/product_detail.html'
     context_object_name = 'product'
+
 
 #
 # def product_update(request, pk):

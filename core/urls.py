@@ -4,6 +4,7 @@ from django.urls import path, include
 from core import settings
 from manufacturing.views.products import HomePageView
 from core.base_view import base_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('manufacturing.urls')),

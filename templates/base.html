@@ -26,12 +26,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'new_product' %}">Create Product</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'registration' %}">Registration</a>
-                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'new_product' %}">Create Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'new_product' %}">{{ request.user.username }}</a>
+                    </li>
+                {% endif %}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{% url 'registration' %}">Registration</a>#}
+{#                </li>#}
+                {% comment %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,8 +52,14 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
+            {% endcomment %}
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    {% if request.user.is_authenticated %}
+                        <a class="nav-link btn btn-danger" href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                        <a class="nav-link btn btn-info" href="{% url 'login' %}">Login</a>
+                    {% endif %}
+
                 </li>
             </ul>
             <form class="d-flex" action="{% url 'search' %}" method="POST">

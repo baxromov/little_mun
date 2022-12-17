@@ -2,12 +2,12 @@ from django import forms
 
 
 class RegisterForm(forms.Form):
-    username = forms.CharField(required=True)
-    first_name = forms.CharField(required=True)
-    last_name = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
-    password1 = forms.CharField(required=True)
-    password2 = forms.CharField(required=True)
+    username = forms.CharField(required=True, error_messages={'message': 'Should complete this field'})
+    first_name = forms.CharField(required=True, error_messages={'message': 'Should complete this field'})
+    last_name = forms.CharField(required=True, error_messages={'message': 'Should complete this field'})
+    email = forms.EmailField(required=True, error_messages={'message': 'Should complete this field'})
+    password1 = forms.CharField(required=True, error_messages={'message': 'Should complete this field'})
+    password2 = forms.CharField(required=True, error_messages={'message': 'Should complete this field'})
 
     def clean(self):
         password1 = self.cleaned_data['password1']
